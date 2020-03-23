@@ -16,16 +16,15 @@
     "name": "Luoxifeng"
   },
   "dependencies": {
+    "@vue/cli-shared-utils": "^4.2.3",
     "chalk": "^3.0.0",
     "commander": "^5.0.0",
+    "inquirer": "^7.1.0",
     "minimist": "^1.2.5",
-    "webpack": "^4.42.0",
-    "webpack-chain": "^6.4.0",
-    "webpack-cli": "^3.3.11"
+    "ora": "^4.0.3",
+    "rxjs": "^6.5.4"
   },
-  "scripts": {
-    "start": "webpack-cli"
-  },
+  "scripts": {},
   "bin": {
     "ultron": "bin/ultron.js"
   }

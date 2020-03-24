@@ -1,7 +1,7 @@
-const program = require('commander')
-const { RedL }  = require('./color');
+import program from 'commander';
+import { RedL } from './color';
 
-module.exports = (methodName, log) => {
+export default (methodName, log) => {
   program.Command.prototype[methodName] = function (...args) {
     if (methodName === 'unknownOption' && this._allowUnknownOption) {
       return

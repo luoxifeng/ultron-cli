@@ -1,0 +1,4 @@
+**/dist
+**/typings
+
+**/__test__

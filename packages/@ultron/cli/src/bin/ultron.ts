@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-const program = require('commander');
-const {
-  Cyan
-} = require('../utils/color');
-const { PKG_CFG } = require('../config');
-require('../cmd');
+import program from 'commander';
+import { Cyan } from '../utils/color';
+import { PKG_CFG } from '../config';
+import '../cmd';
 
 program
   .version(`@ultron/cli ${PKG_CFG.version}`)

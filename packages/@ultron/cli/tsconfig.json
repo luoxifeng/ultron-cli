@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "lib": [
+      "es6",
+      "es2017"
+    ],
+    "target": "es5",
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      "@/typings/*": [
+        "./typings/*"
+      ]
+    },
+    "noEmit": false,
+    "removeComments": false
+  },
+  "include": [
+    "src/**/*",
+    "./typings/"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

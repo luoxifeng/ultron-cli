@@ -1,9 +1,9 @@
 /**
  * 未知的command
  */
-const program = require('commander');
-const { RedL, YellowL, Yellow } = require('../utils/color');
-const enhanceErrorMessages = require('../utils/enhanceErrorMessages');
+import program from 'commander';
+import { RedL, YellowL, Yellow } from '../utils/color';
+import enhanceErrorMessages from '../utils/enhanceErrorMessages';
 
 program
   .arguments('<command>')

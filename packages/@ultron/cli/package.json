@@ -15,17 +15,25 @@
   "author": {
     "name": "Luoxifeng"
   },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "dependencies": {
     "@vue/cli-shared-utils": "^4.2.3",
     "chalk": "^3.0.0",
     "commander": "^5.0.0",
+    "fs-extra": "^9.0.0",
     "inquirer": "^7.1.0",
     "minimist": "^1.2.5",
     "ora": "^4.0.3",
     "rxjs": "^6.5.4"
   },
-  "scripts": {},
+  "devDependencies": {
+    "@types/node": "^13.9.3"
+  },
   "bin": {
-    "ultron": "bin/ultron.js"
-  }
+    "ultron": "dist/bin/ultron.js"
+  },
+  "main": "dist/bin/ultron.js"
 }

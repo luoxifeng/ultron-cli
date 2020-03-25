@@ -30,7 +30,17 @@ module.exports = {
         json: "always"
       }
     ],
-    "arrow-body-style": 0
+    "arrow-body-style": 0,
+    "no-plusplus": 0,
+    "no-underscore-dangle": 0,
+    "max-len": [
+      0, 
+      {
+        code: 150
+      }
+    ],
+    "consistent-return": 0,
+    "@typescript-eslint/no-use-before-define": 0
   },
   overrides: [
     {

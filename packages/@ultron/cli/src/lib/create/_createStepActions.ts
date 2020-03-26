@@ -4,10 +4,16 @@ import { Subject } from 'rxjs';
 import chalk from 'chalk';
 
 const stringify = R.curry(JSON.stringify)(R.__, null, 4);
+const formatUserSelect = (userSelectStr = '') => {
+  return userSelectStr
+    .replace(/("template":\s"vue",?)/igm, '$1 //你选择的框架是Vue')
+    .replace(/("template":\s"react",?)/igm, '$1 //你选择的框架是React')
+    .replace(/("typescript":\strue,?)/igm, '$1 //你启用了ts类型支持')
+    .replace(/("typescript":\sfalse,?)/igm, '$1 //你禁用了ts类型支持');
+};
 
 export const StepActions = [
   /**
-   * 第一步：
    * 用户选择使用的框架
    */
   {
@@ -59,14 +65,15 @@ export const StepActions = [
     name: 'userconfirm',
     action: (next, options: ICreateOptions) => {
       // 打印用户在创建过程中所有的选择, 由用户确认
-      const userSelect = R.pipe<ICreateOptions, string, string>(
+      const userSelect = R.pipe<ICreateOptions, string, string, string>(
         stringify,
+        formatUserSelect,
         chalk.cyan
       )(options);
 
       console.log();
       console.log(chalk.cyan('-↓-↓-↓-↓-↓-↓-↓-↓-以下是你选择的项目配置-↓-↓-↓-↓-↓-↓-↓-↓-'));
-      console.log(chalk.cyan(userSelect));
+      console.log(userSelect);
       console.log(chalk.cyan('-↑-↑-↑-↑-↑-↑-↑-↑-以上是你选择的项目配置-↑-↑-↑-↑-↑-↑-↑-↑-'));
       console.log();
 

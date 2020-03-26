@@ -1,6 +1,5 @@
 import R from 'ramda';
-import { ICreateOptions } from '@/typings/index';
-import { Subject } from 'rxjs';
+import { ICreateOptions, IExecStepOption } from '@/typings/index';
 import chalk from 'chalk';
 
 const stringify = R.curry(JSON.stringify)(R.__, null, 4);
@@ -13,6 +12,31 @@ const formatUserSelect = (userSelectStr = '') => {
 };
 
 export const StepActions = [
+  {
+    name: 'appName',
+    skip: ({ options }: IExecStepOption) => {
+      return options.template;
+    },
+    action: ({ next }: IExecStepOption) => {
+      next({
+        type: 'input',
+        name: 'template',
+        message: '请选择你要使用的框架（暂时只支持Vue, React）',
+        choices: [
+          {
+            checked: false,
+            name: 'Use Vue',
+            value: 'vue'
+          },
+          {
+            checked: false,
+            name: 'Use React',
+            value: 'react'
+          }
+        ]
+      });
+    }
+  },
   /**
    * 用户选择使用的框架
    */
@@ -87,28 +111,29 @@ export const StepActions = [
 ];
 
 
-const execStepCreatorFactory = (steps = []) => (
-  prompts$: Subject<any>,
-  options: ICreateOptions,
-  next: () => void
-) => (stepIndex: number) => {
+
+const execStepCreatorFactory = (steps = []) => (opts: IExecStepOption) => (stepIndex: number) => {
+  const { subject$ } = opts;
   const step = steps[stepIndex];
   if (step) {
     /**
      * 如果配置了跳过条件，
      * 并且满足了跳过条件
      */
-    if (step.skip && step.skip(options)) {
-      return next();
+    if (step.skip && step.skip(opts)) {
+      return opts.next();
     }
 
     if (R.is(Function, step.action)) {
-      return step.action(prompts$.next.bind(prompts$), options);
+      return step.action({
+        ...opts,
+        next: subject$.next.bind(subject$)
+      });
     }
 
-    prompts$.next(step.action);
+    subject$.next(step.action);
   } else {
-    prompts$.complete();
+    subject$.complete();
   }
 };
 

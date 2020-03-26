@@ -29,7 +29,12 @@ export default function create(name, options: ICreateOptions) {
       stepIndex++;
       execStep(stepIndex);
     };
-    const execStep = execStepCreator(prompts$, options, next);
+    const execStep = execStepCreator({
+      subject$: prompts$,
+      options,
+      next,
+      retryCount
+    });
     const prompt = inquirer.createPromptModule();
 
     prompt(prompts$)

@@ -64,10 +64,16 @@ export const StepActions = [
         chalk.cyan
       )(options);
 
+      console.log();
+      console.log(chalk.cyan('-↓-↓-↓-↓-↓-↓-↓-↓-以下是你选择的项目配置-↓-↓-↓-↓-↓-↓-↓-↓-'));
+      console.log(chalk.cyan(userSelect));
+      console.log(chalk.cyan('-↑-↑-↑-↑-↑-↑-↑-↑-以上是你选择的项目配置-↑-↑-↑-↑-↑-↑-↑-↑-'));
+      console.log();
+
       next({
         type: 'confirm',
         name: 'userconfirm',
-        message: userSelect
+        message: `是否确定使用上述项目配置${chalk.yellow('(选否会重走询问流程)')}?`
       });
     }
   }

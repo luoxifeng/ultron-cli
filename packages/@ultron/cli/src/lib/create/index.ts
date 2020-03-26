@@ -71,8 +71,6 @@ export default function create(name, options: ICreateOptions) {
           console.log(chalk.green('完成'));
         }
       );
-    // console.log(subscription)
-    // console.log(subscription);
     /**
      * 执行第一步
      */
@@ -81,22 +79,3 @@ export default function create(name, options: ICreateOptions) {
   // 启动流程
   start();
 }
-
-// export default (name, options) => {
-//   const create$ = create(name, options);
-//   create$.subscribe(
-//     res => {
-//       stopSpinner();
-//       // console.log(res);
-//       console.log(chalk.green('创建成功'));
-//     },
-//     (err) => {
-//       console.log(chalk.green('创建失败'));
-//       stopSpinner(false); // do not persist
-//       error(err);
-//     },
-//   );
-//   sub$.next({
-//     name, options
-//   });
-// };

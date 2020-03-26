@@ -62,12 +62,12 @@ export const StepActions = [
         choices: [
           {
             checked: false,
-            name: 'Use Vue (使用Vue)',
+            name: 'Use Vue (使用Vue作为项目框架)',
             value: 'vue'
           },
           {
             checked: false,
-            name: 'Use React (使用React)',
+            name: 'Use React (使用React作为项目框架)',
             value: 'react'
           }
         ]

@@ -3,6 +3,7 @@
  */
 import program from 'commander';
 import minimist from 'minimist';
+import R from 'ramda';
 import { ICreateOptions } from '../../typings';
 import {
   GreenL,
@@ -12,6 +13,7 @@ import {
 } from '../utils/color';
 import { CLI_LOGO } from '../config';
 import create from '../lib/create';
+import chalk from 'chalk';
 
 
 // function camelize(str) {
@@ -38,12 +40,25 @@ program
   .option('-tpl, --template <type>', 'config project template vue or react (配置项目使用的库，目前支持Vue， React)')
   .option('-ts, --typescript', 'use Typescript (配置项目是否使用ts')
   .action((appName, cmd) => {
+    console.log();
+    // 检验项目名称是否合法
+    if (R.pipe(R.test(/^\w+$/g), R.not)(appName)) {
+      console.log(chalk.red(CLI_LOGO));
+      console.log();
+      console.log(chalk.red('项目名称不能包含特殊字符, 需要满足正则 ‘/^\\w+$/g’'));
+      console.log();
+      process.exit(1);
+      return;
+    }
+
+    console.log(chalk.cyan(CLI_LOGO));
+    console.log();
+
     const options: ICreateOptions = { appName, ...cmd.opts() };
     let appType = YellowL`${options.template === 'react' ? 'React' : 'Vue'}`;
     appType += options.typescript ? ' + Typescript' : '';
-    // console.log(cmd.opts(), cmd.options);
-    // console.log(CyanL`${CLI_LOGO}`);
-    console.log(GreenL`Ultron(奥创) 正在为你创建 ${appType} 项目: ${YellowL`${appName}`} ...`);
+    const appNameColor = chalk.yellow(appName);
+    console.log(chalk.cyan(`Ultron(奥创) 正在为你创建 ${appType} 项目: ${appNameColor} ...`));
     console.log();
 
     if (minimist(process.argv.slice(3))._.length > 1) {

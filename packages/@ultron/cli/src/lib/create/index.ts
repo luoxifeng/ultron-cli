@@ -63,8 +63,6 @@ export default function create(name, options: ICreateOptions) {
             }
           }
 
-          console.log('++++++++');
-
           /**
            * 扩展用户的选择
            * 然后继续走接下来的步骤

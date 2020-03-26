@@ -51,7 +51,8 @@ export default function create(name, options: ICreateOptions) {
                 /* eslint-disable no-param-reassign */
                 retryCount++;
                 console.log(chalk.yellow(`最大可重试3次, 这是你第 ${retryCount} 次重试`));
-                options = {} as any;
+                const { appName } = options;
+                Object.assign(options = {} as any, { appName });
                 start();
                 return;
               }
@@ -61,6 +62,8 @@ export default function create(name, options: ICreateOptions) {
               console.log(chalk.yellow('已确认！接下来为你启动创建。。。'));
             }
           }
+
+          console.log('++++++++');
 
           /**
            * 扩展用户的选择

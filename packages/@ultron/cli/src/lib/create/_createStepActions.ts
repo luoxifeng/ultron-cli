@@ -5,35 +5,44 @@ import chalk from 'chalk';
 const stringify = R.curry(JSON.stringify)(R.__, null, 4);
 const formatUserSelect = (userSelectStr = '') => {
   return userSelectStr
-    .replace(/("template":\s"vue",?)/igm, '$1 //你选择的框架是Vue')
-    .replace(/("template":\s"react",?)/igm, '$1 //你选择的框架是React')
-    .replace(/("typescript":\strue,?)/igm, '$1 //你启用了ts类型支持')
-    .replace(/("typescript":\sfalse,?)/igm, '$1 //你禁用了ts类型支持');
+    .replace(/("appName":\s"(.*?)",?)/igm, '$1 // 项目名称$2')
+    .replace(/("template":\s"vue",?)/igm, '$1 // 你选择的框架是Vue')
+    .replace(/("template":\s"react",?)/igm, '$1 // 你选择的框架是React')
+    .replace(/("typescript":\strue,?)/igm, '$1 // 你启用了ts类型支持')
+    .replace(/("typescript":\sfalse,?)/igm, '$1 // 你禁用了ts类型支持');
 };
 
 export const StepActions = [
   {
     name: 'appName',
-    skip: ({ options }: IExecStepOption) => {
-      return options.template;
+    skip: ({ retryCount }: IExecStepOption) => {
+      return !retryCount;
     },
-    action: ({ next }: IExecStepOption) => {
+    action: ({ next, options }: IExecStepOption) => {
+      const appName = chalk.yellow(options.appName);
       next({
         type: 'input',
-        name: 'template',
-        message: '请选择你要使用的框架（暂时只支持Vue, React）',
-        choices: [
-          {
-            checked: false,
-            name: 'Use Vue',
-            value: 'vue'
-          },
-          {
-            checked: false,
-            name: 'Use React',
-            value: 'react'
-          }
-        ]
+        name: 'appName',
+        message: `是否修改项目名称，修改请输入（不操作则沿用 ${appName}, ${chalk.red('项目名称不能包含特殊字符')}）:`,
+        default: chalk.green(options.appName),
+        validate: input => {
+          return R.allPass([
+            R.pipe(R.trim, Boolean),
+            R.test(/^\w+$/g)
+          ])(input);
+        },
+        filter: input => {
+          const unValid = R.anyPass([
+            R.isEmpty,
+            R.pipe(
+              R.trim,
+              R.not
+            )
+          ])(input);
+          if (unValid) return options.appName;
+          return input;
+        },
+        transformer: input => `${chalk.cyan('项目名称')} ${chalk.green(input)}`
       });
     }
   },
@@ -42,10 +51,10 @@ export const StepActions = [
    */
   {
     name: 'template',
-    skip: (options: ICreateOptions) => {
+    skip: ({ options }: IExecStepOption) => {
       return options.template;
     },
-    action: (next) => {
+    action: ({ next }: IExecStepOption) => {
       next({
         type: 'list',
         name: 'template',
@@ -53,27 +62,27 @@ export const StepActions = [
         choices: [
           {
             checked: false,
-            name: 'Use Vue',
+            name: 'Use Vue (使用Vue)',
             value: 'vue'
           },
           {
             checked: false,
-            name: 'Use React',
+            name: 'Use React (使用React)',
             value: 'react'
           }
         ]
       });
-    }
+    },
   },
   /**
    * 是否启用ts
    */
   {
     name: 'typescript',
-    skip: (options: ICreateOptions) => {
+    skip: ({ options }: IExecStepOption) => {
       return options.typescript;
     },
-    action: next => {
+    action: ({ next }: IExecStepOption) => {
       next({
         type: 'confirm',
         name: 'typescript',
@@ -87,7 +96,7 @@ export const StepActions = [
    */
   {
     name: 'userconfirm',
-    action: (next, options: ICreateOptions) => {
+    action: ({ next, options }: IExecStepOption) => {
       // 打印用户在创建过程中所有的选择, 由用户确认
       const userSelect = R.pipe<ICreateOptions, string, string, string>(
         stringify,
@@ -109,8 +118,6 @@ export const StepActions = [
     }
   }
 ];
-
-
 
 const execStepCreatorFactory = (steps = []) => (opts: IExecStepOption) => (stepIndex: number) => {
   const { subject$ } = opts;

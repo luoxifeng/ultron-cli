@@ -38,7 +38,7 @@ program
   .option('-tpl, --template <type>', 'config project template vue or react (配置项目使用的库，目前支持Vue， React)')
   .option('-ts, --typescript', 'use Typescript (配置项目是否使用ts')
   .action((appName, cmd) => {
-    const options: ICreateOptions = Object.assign(cmd.opts() as any, { appName });
+    const options: ICreateOptions = { appName, ...cmd.opts() };
     let appType = YellowL`${options.template === 'react' ? 'React' : 'Vue'}`;
     appType += options.typescript ? ' + Typescript' : '';
     // console.log(cmd.opts(), cmd.options);

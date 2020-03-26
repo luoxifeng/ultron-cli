@@ -37,18 +37,18 @@ program
   .description(GreenL`create a new project powered by ultron-cli-service`)
   .option('-tpl, --template <type>', 'config project template vue or react (配置项目使用的库，目前支持Vue， React)')
   .option('-ts, --typescript', 'use Typescript (配置项目是否使用ts')
-  .action((name, cmd) => {
-    const options: ICreateOptions = cmd.opts() as any;
+  .action((appName, cmd) => {
+    const options: ICreateOptions = Object.assign(cmd.opts() as any, { appName });
     let appType = YellowL`${options.template === 'react' ? 'React' : 'Vue'}`;
     appType += options.typescript ? ' + Typescript' : '';
     // console.log(cmd.opts(), cmd.options);
     // console.log(CyanL`${CLI_LOGO}`);
-    console.log(GreenL`Ultron(奥创) 正在为你创建 ${appType} 项目: ${YellowL`${name}`} ...`);
+    console.log(GreenL`Ultron(奥创) 正在为你创建 ${appType} 项目: ${YellowL`${appName}`} ...`);
     console.log();
 
     if (minimist(process.argv.slice(3))._.length > 1) {
       console.log(Yellow`Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.`);
     }
 
-    create(name, options);
+    create(appName, options);
   });

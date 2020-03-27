@@ -11,6 +11,7 @@
     "@types/ramda": "^0.27.0",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
+    "colors": "^1.4.0",
     "typescript": "^3.8.3"
   }
 }

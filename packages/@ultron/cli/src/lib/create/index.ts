@@ -11,7 +11,7 @@ import {
   exit,
   logWithSpinner,
 } from '@vue/cli-shared-utils';
-import { ICreateOptions, IAnswer } from '@/typings';
+import { ICreateOptions, IAnswer } from '@/typings/index';
 import { execStepCreator } from './_createStepActions';
 
 let retryCount = 0;

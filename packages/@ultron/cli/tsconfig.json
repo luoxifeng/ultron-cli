@@ -21,7 +21,8 @@
       ]
     },
     "noEmit": false,
-    "removeComments": false
+    "removeComments": false,
+    "strict": true
   },
   "include": [
     "./src/**/*",

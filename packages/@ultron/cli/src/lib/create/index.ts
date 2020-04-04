@@ -4,14 +4,14 @@ import { resolve } from 'path';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import chalk from 'chalk';
-import R from 'ramda';
+// import R from 'ramda';
 import {
   error,
   stopSpinner,
   exit,
   logWithSpinner,
 } from '@vue/cli-shared-utils';
-import { ICreateOptions, IAnswer } from '@/typings/index';
+import { ICreateOptions, IAnswer } from '@/typings';
 import { execStepCreator } from './_createStepActions';
 
 let retryCount = 0;

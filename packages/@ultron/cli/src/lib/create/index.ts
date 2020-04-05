@@ -1,27 +1,30 @@
-import { Subject, EMPTY, of, from, Subscription, Subscriber } from 'rxjs';
-import { mergeMap, map, catchError, retry } from 'rxjs/operators';
-import { resolve } from 'path';
-import fs from 'fs-extra';
-import inquirer from 'inquirer';
+/**
+ * 创建询问流程
+ */
+import { Subject } from 'rxjs';
+// import { mergeMap, map, catchError, retry } from 'rxjs/operators';
+// import { resolve } from 'path';
+// import fs from 'fs-extra';
+import inquirer, { Answers } from 'inquirer';
 import chalk from 'chalk';
 // import R from 'ramda';
-import {
-  error,
-  stopSpinner,
-  exit,
-  logWithSpinner,
-} from '@vue/cli-shared-utils';
-import { ICreateOptions, IAnswer } from '@/typings/index';
+// import {
+//   error,
+//   stopSpinner,
+//   exit,
+//   logWithSpinner
+// } from '@vue/cli-shared-utils';
+import { ICreateOptions } from '@/typings/index';
 import { execStepCreator } from './_createStepActions';
 
 let retryCount = 0;
-const formatAnswer = ({ name, answer }: IAnswer) => {
+const formatAnswer = ({ name, answer }: Answers) => {
   return {
     [name]: answer
   };
 };
 
-export default function create(name, options: ICreateOptions) {
+export default function create(options: ICreateOptions) {
   function start() {
     let stepIndex = 0;
     const prompts$ = new Subject<any>();

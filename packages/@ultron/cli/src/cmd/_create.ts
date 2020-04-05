@@ -4,16 +4,15 @@
 import program from 'commander';
 import minimist from 'minimist';
 import R from 'ramda';
+import chalk from 'chalk';
 import { ICreateOptions } from '../../typings';
 import {
   GreenL,
-  CyanL,
   Yellow,
   YellowL
 } from '../utils/color';
 import { CLI_LOGO } from '../config';
 import create from '../lib/create';
-import chalk from 'chalk';
 
 
 // function camelize(str) {
@@ -48,7 +47,6 @@ program
       console.log(chalk.red('项目名称不能包含特殊字符, 需要满足正则 ‘/^\\w+$/g’'));
       console.log();
       process.exit(1);
-      return;
     }
 
     console.log(chalk.cyan(CLI_LOGO));
@@ -65,5 +63,5 @@ program
       console.log(Yellow`Info: You provided more than one argument. The first one will be used as the app\'s name, the rest are ignored.`);
     }
 
-    create(appName, options);
+    create(options);
   });

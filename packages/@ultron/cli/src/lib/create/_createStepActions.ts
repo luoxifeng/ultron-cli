@@ -1,8 +1,15 @@
+/**
+ * 创建步骤配置以及执行器
+ */
 import R from 'ramda';
-import { ICreateOptions, IExecStepOption } from '@/typings/index';
+import {
+  ICreateOptions,
+  IExecStepOption,
+  IExecStep
+} from '@/typings/index';
 import chalk from 'chalk';
 
-const stringify = R.curry(JSON.stringify)(R.__, null, 4);
+const stringify = target => JSON.stringify(target, null, 4);
 const formatUserSelect = (userSelectStr = '') => {
   return userSelectStr
     .replace(/("appName":\s"(.*?)",?)/igm, '$1 // 项目名称$2')
@@ -12,7 +19,7 @@ const formatUserSelect = (userSelectStr = '') => {
     .replace(/("typescript":\sfalse,?)/igm, '$1 // 你禁用了ts类型支持');
 };
 
-export const StepActions = [
+export const StepActions: IExecStep[] = [
   {
     name: 'appName',
     skip: ({ retryCount }: IExecStepOption) => {
@@ -119,7 +126,7 @@ export const StepActions = [
   }
 ];
 
-const execStepCreatorFactory = (steps = []) => (opts: IExecStepOption) => (stepIndex: number) => {
+const execStepCreatorFactory = (steps: IExecStep[] = []) => (opts: IExecStepOption) => (stepIndex: number) => {
   const { subject$ } = opts;
   const step = steps[stepIndex];
   if (step) {
@@ -130,15 +137,10 @@ const execStepCreatorFactory = (steps = []) => (opts: IExecStepOption) => (stepI
     if (step.skip && step.skip(opts)) {
       return opts.next();
     }
-
-    if (R.is(Function, step.action)) {
-      return step.action({
-        ...opts,
-        next: subject$.next.bind(subject$)
-      });
-    }
-
-    subject$.next(step.action);
+    step.action({
+      ...opts,
+      next: subject$.next.bind(subject$)
+    });
   } else {
     subject$.complete();
   }

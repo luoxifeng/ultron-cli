@@ -25,7 +25,7 @@ import chalk from 'chalk';
 // } from '@vue/cli-shared-utils';
 import { ICreateOptions } from '@/typings/index';
 import { execStepCreator } from './_createStepActions';
-import Create from './Create';
+import Creator from './Creator';
 
 let retryCount = 0;
 const formatAnswer = ({ name, answer }: Answers) => {
@@ -34,7 +34,7 @@ const formatAnswer = ({ name, answer }: Answers) => {
   };
 };
 
-export default function create(options: ICreateOptions) {
+export default async function create(options: ICreateOptions) {
   function start() {
     let stepIndex = 0;
     const prompts$ = new Subject<any>();
@@ -87,7 +87,8 @@ export default function create(options: ICreateOptions) {
           console.log(chalk.red('出错'));
         },
         () => {
-          new Create(options);
+          const creator = new Creator(options);
+          creator.create();
         }
       );
     /**

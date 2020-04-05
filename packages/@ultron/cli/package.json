@@ -20,6 +20,7 @@
     "build": "tsc"
   },
   "dependencies": {
+    "@types/fs-extra": "^8.1.0",
     "@vue/cli-shared-utils": "^4.2.3",
     "chalk": "^3.0.0",
     "commander": "^5.0.0",

@@ -41,7 +41,17 @@ module.exports = {
     ],
     "consistent-return": 0,
     "@typescript-eslint/no-use-before-define": 0,
-    "no-new": 0
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "no-new": 0,
+    "padded-blocks": 0,
+    "import/prefer-default-export": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    quotes: [2, "single", { "allowTemplateLiterals": true }],
+    "@typescript-eslint/no-var-requires": 0,
+    "global-require": 0,
+    "import/no-dynamic-require": 0,
+    "no-restricted-syntax": 0,
+    "class-methods-use-this": 0
   },
   overrides: [
     {

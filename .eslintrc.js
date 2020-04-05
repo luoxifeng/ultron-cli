@@ -40,7 +40,8 @@ module.exports = {
       }
     ],
     "consistent-return": 0,
-    "@typescript-eslint/no-use-before-define": 0
+    "@typescript-eslint/no-use-before-define": 0,
+    "no-new": 0
   },
   overrides: [
     {

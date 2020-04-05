@@ -7,6 +7,15 @@ import { Subject } from 'rxjs';
 // import fs from 'fs-extra';
 import inquirer, { Answers } from 'inquirer';
 import chalk from 'chalk';
+// import {
+//   // execa,
+//   // semver,
+
+//   clearConsole,
+
+//   // hasYarn,
+//   // hasPnpm3OrLater
+// } from '@vue/cli-shared-utils';
 // import R from 'ramda';
 // import {
 //   error,
@@ -16,6 +25,7 @@ import chalk from 'chalk';
 // } from '@vue/cli-shared-utils';
 import { ICreateOptions } from '@/typings/index';
 import { execStepCreator } from './_createStepActions';
+import Create from './Create';
 
 let retryCount = 0;
 const formatAnswer = ({ name, answer }: Answers) => {
@@ -77,7 +87,7 @@ export default function create(options: ICreateOptions) {
           console.log(chalk.red('出错'));
         },
         () => {
-          console.log(chalk.green('完成'));
+          new Create(options);
         }
       );
     /**

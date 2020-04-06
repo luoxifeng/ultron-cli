@@ -1,0 +1,26 @@
+{
+  "name": "@ultron/cli-types",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "keywords": [
+    "ultron",
+    "cli",
+    "common webapp cli"
+  ],
+  "license": "MIT",
+  "deprecated": false,
+  "description": "Command line interface for webapp development",
+  "author": {
+    "name": "Luoxifeng"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@types/normalize-package-data": "^2.4.0"
+  },
+  "types": "./index.d.ts"
+}

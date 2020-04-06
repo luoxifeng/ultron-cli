@@ -1,0 +1,31 @@
+{
+  "name": "@ultron/cli-plugin-mypkgs",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=8.9"
+  },
+  "keywords": [
+    "ultron",
+    "cli",
+    "common webapp cli"
+  ],
+  "license": "MIT",
+  "deprecated": false,
+  "description": "Command line interface for webapp development",
+  "author": {
+    "name": "Luoxifeng"
+  },
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "ramda": "^0.27.0",
+    "rxjs": "^6.5.4"
+  },
+  "devDependencies": {
+    "@types/ramda": "^0.27.3",
+    "@ultron/cli-types": "^0.0.0"
+  },
+  "main": "./dist/index.js"
+}

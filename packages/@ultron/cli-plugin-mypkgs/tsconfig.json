@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true,
+    "lib": [
+      "es6",
+      "es2017",
+      "dom"
+    ],
+    "target": "es5",
+    "jsx": "preserve",
+    "noImplicitAny": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      "@/typings/*": [
+        "./typings/*"
+      ],
+    },
+    "noEmit": false,
+    "removeComments": false,
+    "strict": true
+  },
+  "include": [
+    "./src/**/*",
+    "./typings/**/*.d.ts", "../cli-plugin-mypkgs"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

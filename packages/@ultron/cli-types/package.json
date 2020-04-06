@@ -20,6 +20,8 @@
     "build": "tsc"
   },
   "dependencies": {
+  },
+  "devDependencies": {
     "@types/normalize-package-data": "^2.4.0"
   },
   "types": "./index.d.ts"

@@ -34,7 +34,7 @@ module.exports = {
     "no-plusplus": 0,
     "no-underscore-dangle": 0,
     "max-len": [
-      0, 
+      0,
       {
         code: 150
       }
@@ -51,7 +51,8 @@ module.exports = {
     "global-require": 0,
     "import/no-dynamic-require": 0,
     "no-restricted-syntax": 0,
-    "class-methods-use-this": 0
+    "class-methods-use-this": 0,
+    "import/no-extraneous-dependencies": 0
   },
   overrides: [
     {

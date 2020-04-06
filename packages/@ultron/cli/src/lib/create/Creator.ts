@@ -53,6 +53,7 @@ export default class Creator extends EventEmitter {
     log(`⚙\u{fe0f}  Installing deps. This might take a while...`);
     log();
     const plugins = await this.resolvePlugins();
+    
 
 
 
